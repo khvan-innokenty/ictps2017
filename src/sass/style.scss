@@ -1,0 +1,274 @@
+@import "normalize";
+@import "variables";
+@import "royal-slider";
+@import "royal-slider-default";
+@import "icons";
+@import "buttons";
+@import "header";
+@import "hero";
+@import "schedule";
+@import "dissection";
+@import "contest";
+@import "business";
+@import "pricelist";
+@import "register-form";
+@import "dinner";
+@import "venue";
+
+html,
+body {
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.cf:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.hidden {
+  display: none;
+}
+
+.primary {
+  color: $primary;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.container {
+  width: 95%;
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+
+.block {
+  padding: 3.5em 0;
+}
+
+
+@media (max-width: $bp-tablet) {
+  .container {
+    width: auto;
+    margin: 0 $container-padding-tablet;
+  }
+}
+
+
+
+/* ======================================================
+    ТИПОГРАФИКА
+   ====================================================== */
+
+h2 {
+  font-size: 50px;
+  padding: 0;
+  margin: 0 0 .5em;
+  font-weight: 300;
+  text-align: center;
+}
+
+h3 {
+  font-size: 25px;
+  font-weight: 400;
+  margin: 1em 0;
+}
+
+a {
+  display: inline-block;
+  color: $secondary;
+
+  &:hover {
+    color: darken($secondary, 10%);
+  }
+}
+
+
+@media (max-width: $bp-tablet) {
+  h2 {
+    font-size: 40px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+}
+
+
+@media (max-width: $bp-phone) {
+  h2 {
+    font-size: 35px;
+  }
+}
+
+/* ======================================================
+    ФАКТЫ
+   ====================================================== */
+
+.facts {
+  background: #f3f3f3;
+}
+
+.fact {
+  width: 33.3%;
+  float: left;
+  padding-right: 2em;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+@media (max-width: $bp-small) {
+  .fact {
+    width: auto;
+    float: none;
+    margin: 1em;
+    padding: 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+
+
+/* ======================================================
+    Научный комитет
+   ====================================================== */
+
+.committee {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    vertical-align: top;
+    padding: 1em;
+    width: 300px;
+    white-space: normal;
+
+    img {
+      border-radius: 200px;
+      box-shadow: 1px 30px 40px rgba(33, 64, 154, 0.31);
+    }
+  }
+}
+
+.committee__fullname {
+  color: $primary;
+  margin: 1em 0 .5em;
+}
+
+.committee__description {
+  color: #888;
+}
+
+@media (max-width: $bp-phone) {
+  .committee {
+    li {
+      width: 270px;
+      font-size: 12px;
+    }
+  }
+}
+
+
+/* ======================================================
+    Спикеры
+   ====================================================== */
+
+.speakers__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    vertical-align: top;
+    padding: 1em 1em 2em;
+    width: 290px;
+    white-space: normal;
+  }
+}
+
+.speaker__fullname {
+  font-size: 20px;
+  color: $primary;
+  margin: .5em 0;
+
+  img {
+    vertical-align: baseline;
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    margin-left: .3em;
+  }
+}
+
+.speaker__description {
+  color: #888;
+}
+
+
+@media (max-width: $bp-small) {
+  .speakers .container {
+    margin: 0;
+  }
+
+  .speakers__list {
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    text-align: center;
+  }
+}
+
+
+@media (max-width: $bp-phone) {
+  .speakers__list {
+    li {
+      width: 260px;
+    }
+  }
+}
+
+
+/* ======================================================
+    Экспоненты
+   ====================================================== */
+
+.expo {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+
+  li {
+    margin: 1em;
+    display: inline-block;
+    vertical-align: top;
+  }
+}

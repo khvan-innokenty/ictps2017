@@ -1,0 +1,175 @@
+$header-padding: 1em;
+
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: #2E2E2E;
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.75);
+  color: white;
+  z-index: 1234567;
+
+  a {
+    display: inline-block;
+    text-decoration: none;
+    padding: $header-padding;
+    color: white;
+
+    span {
+      border-bottom: 1px solid rgba(255, 255, 255, .4);
+      transition: border $transition;
+    }
+
+    &:hover {
+      color: white;
+
+      span {
+        border-bottom-color: white;
+      }
+    }
+  }
+}
+
+.header__left {
+  float: left;
+}
+
+.header__right {
+  float: right;
+}
+
+.change-language {
+  background: #494949;
+  text-transform: uppercase;
+}
+
+.change-site {
+  background: #B70C05;
+}
+
+.header__navigation {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    float: left;
+  }
+}
+
+
+.hamburger {
+  float: right;
+  width: 34px;
+  height: 34px;
+  position: relative;
+  margin: 5px 10px;
+  overflow: hidden;
+  display: none;
+
+  &.active {
+    .hamburger__line1,
+    .hamburger__line3 {
+      transform: translate(-50px, 0);
+    }
+
+    .hamburger__line2 {
+      transform: translate(50px, 0);
+    }
+
+    .hamburger__line4 {
+      transform: rotate(45deg) translate(0, 0);
+    }
+
+    .hamburger__line5 {
+      transform: rotate(-45deg) translate(0, 0);
+    }
+
+    .list {
+      display: block;
+    }
+  }
+}
+
+.hamburger__line1,
+.hamburger__line2,
+.hamburger__line3,
+.hamburger__line4,
+.hamburger__line5 {
+  position: absolute;
+  height: 4px;
+  background: white;
+  width: 100%;
+  left: 0;
+  transition: transform .3s;
+}
+
+.hamburger__line1 {
+  top: 5px;
+}
+
+.hamburger__line2 {
+  margin-top: -2px;
+  top: 50%;
+}
+
+.hamburger__line3 {
+  bottom: 5px;
+}
+
+.hamburger__line4 {
+  transform-origin: 50% 50%;
+  transform: rotate(45deg) translate(-54px, 0);
+  top: 50%;
+  margin-top: -2px;
+}
+
+.hamburger__line5 {
+  transform-origin: 50% 50%;
+  transform: rotate(-45deg) translate(54px, 0);
+  top: 50%;
+  margin-top: -2px;
+}
+
+
+
+@media (max-width: $bp-tablet) {
+  .header {
+    font-size: 14px;
+
+    .container {
+      margin: 0;
+    }
+  }
+}
+
+
+@media (max-width: $bp-small) {
+  .header__navigation {
+    position: fixed;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding-top: 50px;
+    padding-bottom: 1px;
+    background: black;
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.75);
+    transform: translate(0, -100%);
+
+    li {
+      float: none;
+    }
+
+    &.active {
+      transform: translate(0, 0);
+      transition: transform $transition;
+    }
+  }
+
+  .hamburger {
+    display: block;
+  }
+}

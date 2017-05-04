@@ -1,0 +1,215 @@
+.schedule {
+  background: $primary;
+  color: white;
+
+  h4 {
+    font-size: 20px;
+    font-weight: 400;
+    position: relative;
+    padding-left: 2em;
+    margin: 1.2em 0 .5em;
+
+    img {
+      position: absolute;
+      height: 1.5em;
+      width: 1.5em;
+      top: 50%;
+      left: 0;
+      margin-top: -.75em;
+    }
+  }
+}
+
+.day__selector {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    margin: 15px;
+    padding: 0;
+  }
+
+  a {
+    display: inline-block;
+    font-size: 20px;
+    color: white;
+    padding: .5em 1em;
+    text-decoration: none;
+    border: 2px dashed white;
+    border-radius: 5px;
+
+    .day__title {
+      border-bottom: 1px solid rgba(255, 255, 255, .4);
+    }
+
+    .day__dof {
+      display: block;
+      margin-top: .4em;
+      font-weight: 300;
+      font-size: .8em;
+    }
+
+    &:hover {
+      color: white;
+
+      .day__title {
+        border-bottom-color: white;
+      }
+    }
+
+    &.active {
+      border-style: solid;
+      background: white;
+      color: $primary;
+
+      .day__title {
+        border-bottom-color: transparent !important;
+      }
+    }
+  }
+}
+
+.day__schedule {
+  margin-top: 1em;
+}
+
+.session {
+  background: white;
+  border-right: .5em solid $primary;
+  color: $primary;
+  padding: 1em;
+  margin-top: 2em;
+
+  h3 {
+    margin: 0;
+    padding: 0;
+  }
+
+  .moderators {
+    margin-top: .5em;
+    font-size: .9em;
+    font-weight: 300;
+  }
+}
+
+.parallel {
+  width: 50%;
+  float: left;
+}
+
+.operations,
+.lectures {
+  .attention {
+    position: relative;
+    padding-left: 2em;
+    margin: 1em 0;
+
+    &:before {
+      content: '!';
+      font-size: 1.2em;
+      height: 1.2em;
+      line-height: 1.2em;
+      width: 1.2em;
+      font-weight: 700;
+      border-radius: 3em;
+      border: 1px solid white;
+      position: absolute;
+      text-align: center;
+      left: 0;
+      top: 50%;
+      margin-top: -.6em;
+    }
+  }
+}
+
+.operations {
+  .operation {
+    background: rgba(255, 255, 255, .2);
+    padding: 1em;
+    margin: .1em 0 .1em 0;
+    border-right: .5em solid $primary;
+
+    .surgery {
+      padding-left: 1em;
+      font-size: .9em;
+      font-weight: 300;
+      font-style: italic;
+    }
+  }
+}
+
+
+.lectures {
+  display: table;
+  width: 100%;
+  border-spacing: 0 .2em;
+
+  .lecture {
+    display: table-row;
+  }
+
+  .timing,
+  .description {
+    background: rgba(0, 0, 0, .05);
+    display: table-cell;
+    padding: 1em;
+  }
+
+  .timing {
+    width: 80px;
+  }
+
+  .description {
+    border-right: .5em solid $primary;
+  }
+
+  .speaker {
+    padding-left: 1em;
+    font-size: .9em;
+    font-weight: 300;
+    font-style: italic;
+  }
+}
+
+
+@media (max-width: $bp-small) {
+  .day__selector {
+    margin-left: -$container-padding-tablet;
+    margin-right: -$container-padding-tablet;
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    text-align: center;
+
+    a {
+      font-size: 16px;
+    }
+
+    li {
+      margin: 8px;
+    }
+  }
+}
+
+@media (max-width: $bp-phone) {
+  .day__selector {
+    li {
+      margin: 0;
+    }
+  }
+
+  .parallel {
+    width: auto;
+    float: none;
+
+    &:last-child {
+      margin-top: 1.5em;
+      padding-top: 1.5em;
+      border-top: 4px dotted white;
+    }
+  }
+}

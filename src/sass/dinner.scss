@@ -1,0 +1,107 @@
+.dinner {
+  background-color: black;
+  background-image: url('/img/dinner.jpg');
+  background-size: cover;
+  color: white;
+
+  h2 {
+    margin-bottom: 1em;
+  }
+}
+
+.dinner__table {
+  display: table;
+  width: 100%;
+}
+
+.dinner__left,
+.dinner__center,
+.dinner__right {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  padding: 2em 0;
+  font-size: 25px;
+}
+
+.dinner__left,
+.dinner_right {
+  width: 34%;
+}
+
+.dinner__left {
+  padding-right: 2em;
+}
+
+.dinner__right {
+  padding-left: 2em;
+}
+
+.dinner__center {
+  width: 32%;
+}
+
+.dinner__center {
+  background: url("/img/dinner.svg") no-repeat center center;
+  background-size: contain;
+}
+
+.dinner__price {
+  font-size: 1.5em;
+  margin-top: .3em;
+
+  .rubles {
+    font-weight: 300;
+    font-size: .8em;
+  }
+}
+
+.dinner__at {
+  font-weight: 300;
+  font-size: .8em;
+}
+
+.dinner__transfer__time {
+  font-size: 1.5em;
+  margin: .3em 0 .6em;
+}
+
+.dinner__transfer__time--last {
+  margin-bottom: 0;
+}
+
+.dinner__date-n-time {
+  font-size: 1.5em;
+  font-weight: 300;
+  color: black;
+}
+
+
+@media (max-width: $bp-tablet) {
+  .dinner__left,
+  .dinner__center,
+  .dinner__right {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .dinner__date-n-time {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: $bp-small) {
+  .dinner__table,
+  .dinner__left,
+  .dinner__center,
+  .dinner__right {
+    display: block;
+    width: auto;
+    padding: 0;
+  }
+
+  .dinner__center {
+    padding: 2em 0;
+    margin: 2em 0;
+  }
+}

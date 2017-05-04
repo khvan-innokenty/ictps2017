@@ -1,0 +1,119 @@
+.pricelist {
+}
+
+.pricelist__table {
+  background: white;
+  display: table;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(33, 64, 154, 0.24);
+}
+
+.pricelist__ticket,
+.pricelist__header {
+  display: table-row;
+}
+
+.pricelist__ticket__blank,
+.pricelist__ticket__title,
+.pricelist__ticket__price {
+  vertical-align: middle;
+  display: table-cell;
+  padding: 15px;
+}
+
+.pricelist__ticket__blank--primary {
+  background: $primary;
+}
+
+.pricelist__ticket__title {
+  font-size: 20px;
+  background: $primary;
+  border-bottom: 1px solid #395CC4;
+  color: white;
+
+  .comment {
+    font-weight: 300;
+    font-size: .8em;
+    margin-top: .5em;
+  }
+}
+
+.pricelist__ticket__blank,
+.pricelist__ticket__price {
+  &.past {
+    color: #bbb;
+  }
+
+  &.current {
+    color: $primary;
+  }
+
+  .rubles {
+    font-weight: 300;
+    font-size: .8em;
+  }
+}
+
+.pricelist__ticket__price {
+  border-bottom: 1px solid #ccc;
+}
+
+.pricelist__ticket__price__sum {
+  margin-top: .5em;
+  font-size: 25px;
+  white-space: nowrap;
+}
+
+.pricelist__comment {
+  margin-top: 1em;
+  color: #999;
+}
+
+.pricelist__ticket__price__date,
+.pricelist__arrow-down {
+  display: none;
+}
+
+
+
+@media (max-width: $bp-tablet) {
+  .pricelist__header {
+    display: none;
+  }
+
+  .pricelist__arrow-down {
+    display: inline;
+  }
+
+  .pricelist__table,
+  .pricelist__ticket,
+  .pricelist__ticket__title,
+  .pricelist__ticket__price__date {
+    display: block;
+  }
+
+  .pricelist__ticket__title,
+  .pricelist__ticket__price {
+    padding: 10px;
+  }
+
+  .pricelist__ticket__price {
+    display: table;
+    width: 100%;
+  }
+
+  .pricelist__ticket__title {
+    font-size: 16px;
+  }
+
+  .pricelist__ticket__price__sum,
+  .pricelist__ticket__price__date {
+    display: table-cell;
+    font-size: 16px;
+  }
+
+  .pricelist__ticket__price__sum {
+    text-align: right;
+  }
+
+}

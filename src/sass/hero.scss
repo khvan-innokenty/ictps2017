@@ -1,0 +1,168 @@
+.hero {
+  background-size: contain;
+  background: url('/img/city.jpg?v=2') no-repeat center bottom;
+  height: 100vh;
+  min-height: 700px;
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: url('/img/rhombus.png?v=5') no-repeat right top;
+  }
+}
+
+.hero__absolute {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.hero__block1 {
+  top: 15%;
+}
+
+.hero__block2 {
+  top: 32%;
+}
+
+.hero__block3 {
+  bottom: 50px;
+}
+
+.hero__date-n-city {
+  font-size: 32px;
+  font-weight: 300;
+
+  div {
+    width: 50%;
+    float: left;
+    padding-left: .5em;
+  }
+
+  div:first-child {
+    padding-right: .5em;
+    text-align: right;
+    border-right: 1px solid black;
+  }
+}
+
+.hero__logo {
+  width: 860px;
+  margin: 0 auto;
+  text-transform: uppercase;
+  font-size: 50px;
+  display: table;
+
+  img {
+    vertical-align: middle;
+    margin-right: 20px;
+  }
+
+  div {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+.hero__register {
+  text-align: center;
+
+  .button {
+    padding-left: 4em;
+    padding-right: 4em;
+  }
+}
+
+
+
+@media (max-width: $bp-tablet) {
+  .hero {
+    min-height: 600px;
+  }
+
+  .hero__date-n-city {
+    font-size: 25px;
+  }
+
+  .hero__logo {
+    font-size: 35px;
+    width: 650px;
+
+    img {
+      height: 200px;
+    }
+  }
+}
+
+
+@media (max-width: $bp-small) {
+  .hero {
+    min-height: 0;
+    height: auto;
+
+    &:before {
+      background: none;
+    }
+  }
+
+  .hero__absolute {
+    position: static;
+    left: auto;
+    right: auto;
+    top: auto;
+  }
+
+  .hero__date-n-city {
+    padding: 70px 0 0;
+  }
+
+  .hero__logo {
+    margin: 100px auto;
+  }
+
+  .hero__register {
+    padding-bottom: 50px;
+  }
+}
+
+
+@media (max-width: $bp-phone) {
+  .hero__date-n-city {
+    font-size: 20px;
+
+    div {
+      float: none;
+      width: auto;
+      border: none !important;
+      text-align: center !important;
+      margin: .5em 0;
+    }
+  }
+
+  .hero__logo {
+    display: block;
+    width: auto;
+    font-size: 25px;
+    padding-left: $container-padding-tablet;
+    padding-right: $container-padding-tablet;
+    margin: 50px 0;
+    text-align: center;
+    text-transform: none;
+
+    div {
+      display: block;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto 1em;
+      height: auto;
+      width: 150px;
+    }
+  }
+}

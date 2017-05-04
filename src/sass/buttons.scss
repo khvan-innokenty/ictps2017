@@ -1,0 +1,115 @@
+.button {
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: .25em;
+  font-size: 20px;
+  font-weight: 300;
+  padding: 1em;
+  margin: .5em;
+  background: $secondary no-repeat center center;
+  color: white;
+  box-shadow: 0 8px 20px rgba(33, 64, 154, 0.32);
+  overflow: hidden;
+  position: relative;
+  transform: perspective(1px) translateZ(0);
+  transition: box-shadow $transition;
+  text-decoration: none;
+
+  .arrow_right,
+  .arrow_left {
+    display: inline-block;
+    transition: transform $transition;
+  }
+
+  &:disabled {
+    box-shadow: none;
+    cursor: default;
+    opacity: .5;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    transition: transform $transition;
+    background: darken($secondary, 5%);
+    transform-origin: 50%;
+    transform: scale(1, 0);
+  }
+
+  &:disabled:before {
+    display: none;
+  }
+
+  &:hover,
+  &:focus {
+    color: white;
+
+    &:before {
+      transform: scale(1, 1);
+    }
+
+    .arrow_right {
+      transform: translate(5px);
+    }
+
+    .arrow_left {
+      transform: translate(-5px);
+    }
+  }
+
+  &:disabled:hover,
+  &:disabled:focus {
+    .arrow_right {
+      transform: translate(0);
+    }
+
+    .arrow_left {
+      transform: translate(0);
+    }
+  }
+
+
+  &:active:enabled {
+    box-shadow: 0 2px 5px rgba(33, 64, 154, 0.4);
+  }
+
+  &.loading {
+    span {
+      visibility: hidden;
+    }
+
+    background-image: url('/img/loading-secondary-bg.gif');
+  }
+}
+
+.button--with-image {
+  padding-left: 2.5em;
+
+  img {
+    position: absolute;
+    left: .5em;
+    top: 50%;
+    margin-top: -.75em;
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
+
+.button--pay {
+  padding: .5em 1em;
+  margin: 0;
+}
+
+
+@media (max-width: $bp-small) {
+  .button {
+    font-size: 16px;
+  }
+}

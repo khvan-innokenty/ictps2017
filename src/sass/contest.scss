@@ -1,0 +1,56 @@
+.contest {
+  background: #f2f2f2;
+}
+
+.contest__table {
+  display: table;
+}
+
+.contest__image {
+  display: table-cell;
+  padding-right: 3em;
+  vertical-align: top;
+}
+
+.contest__description {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.contest__title {
+  color: $primary;
+  font-size: 25px;
+  font-weight: 300;
+}
+
+.contest__prizes {
+  margin: 2em 0;
+  font-size: 20px;
+}
+
+.contest__prize {
+  margin: 1em 0;
+  font-weight: 300;
+
+  b {
+    font-weight: 400;
+  }
+}
+
+@media (max-width: $bp-tablet) {
+  .contest__image img {
+    width: 300px;
+  }
+}
+
+@media (max-width: $bp-small) {
+  .contest__table,
+  .contest__description {
+    display: block;
+    text-align: center;
+  }
+
+  .contest__image {
+    display: none;
+  }
+}
