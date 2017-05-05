@@ -101,7 +101,6 @@ function(a,b){e===b&&d()});a.ev.on("rsAfterContentSet.rsAutoHeight",function(a,b
         totalPriceSelector: '#rf-total-price',
         bulletClass: 'rf__bullet',
         bulletTitleClass: 'rf__bullet__title',
-        checkEmailUrl: '/check-email',
         registerUrl: '/register'
     };
 
@@ -455,6 +454,7 @@ function(a,b){e===b&&d()});a.ev.on("rsAfterContentSet.rsAutoHeight",function(a,b
         $form.addClass('loading');
         $buttonNext.prop('disabled', true);
         $buttonPrev.prop('disabled', true);
+        $overlay.hide();
 
         console.log( data );
 
@@ -462,35 +462,14 @@ function(a,b){e===b&&d()});a.ev.on("rsAfterContentSet.rsAutoHeight",function(a,b
         $("input[name='user_email']").val( data['email'] );
         $("input[name='userField_1']").val( data['email'] );
 
-        $.post(
-            settings.checkEmailUrl, {email: data['email']}
-        ).always(function( msg ){
-            var json = $.parseJSON( msg );
-
-            if ( parseInt(json.status) === 0 ) {
-
-                $.post(settings.registerUrl, data, function(){
-                    $form.removeClass('loading').addClass('last-step');
-                    $buttonNext.prop('disabled', false);
-                    $buttonPrev.prop('disabled', false);
-                    $overlay.hide();
-                    $(".f-modal-icon").addClass('animate');
-                    setStep( lastStep );
-                });
-            } else {
-                var $input = $("input[name='email']"),
-                    $parent = $input.parent(),
-                    $error = $parent.find('.error');
-
-                $parent.removeClass('correct').addClass('error');
-                $error.html( json.msg );
-
-                $form.removeClass('loading');
-                $buttonNext.prop('disabled', false);
-                $buttonPrev.prop('disabled', false);
-                $overlay.hide();
-                slider.goTo( 1 );
-            }
+        $.post(settings.registerUrl, data, function( msg ){
+            $form.removeClass('loading').addClass('last-step');
+            $buttonNext.prop('disabled', false);
+            $buttonPrev.prop('disabled', false);
+            $overlay.hide();
+            $(".f-modal-icon").addClass('animate');
+            setStep( lastStep );
+            console.log( msg );
         });
     }
 

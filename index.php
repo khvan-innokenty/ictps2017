@@ -60,8 +60,6 @@ $f3->route('GET /location',
 
 $f3->route('POST /register', 'register');
 
-$f3->route('POST /check-email', 'checkEmail');
-
 $f3->run();
 
 
@@ -86,6 +84,7 @@ function register($f3) {
 		if ($ticketId === intval($tickets[$i]['id']) ) {
 			$ticketTitle = $tickets[$i]['title'];
 			if (is_array($ticketTitle)) $ticketTitle = implode(" ", $ticketTitle);
+			$ticketTitle .= " " . $tickets[$i]['comment'];
 			break;
 		}
 	}
@@ -115,35 +114,18 @@ function register($f3) {
 	sendEmail('d.medentsov@bioconcept.ru', 'Регистрация на ICTPS (' . $post['f'] . ')', $data );
 
 	file_put_contents( $f3->get('ROOT') .'/registration.txt', implode("\r\n", $data), FILE_APPEND);
-}
 
+	$myCurl = curl_init();
+	curl_setopt_array($myCurl, array(
+		CURLOPT_URL => 'http://www.ictps.ru/events/new_order.php',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_POST => true,
+		CURLOPT_POSTFIELDS => http_build_query($post)
+	));
+	$response = curl_exec($myCurl);
+	curl_close($myCurl);
 
-/**
- * Проверить существование E-mail
- * Todo: Реализовать проверку email
- * @param $f3 Base
- */
-function checkEmail($f3) {
-	$post = $f3->get('POST');
-	$email = filter_var( $post['email'], FILTER_SANITIZE_EMAIL);
-	$emailExists = false;
-
-	$response = array(
-		'status' => 0,
-		'msg' => ''
-	);
-
-	/*
-	 * ЗДЕСЬ НУЖНО ВСТАВИТЬ КОД, ПРОВЕРЯЮЩИЙ НАЛИЧИЕ ПОЧТЫ В CRM
-	 * ЕСЛИ ПОЧТОВЫЙ АДРЕС НАЙДЕН, ТО НУЖНО ИЗМЕНИТЬ ПЕРЕМЕННУЮ $emailExists = true;
-	 */
-
-	if ($emailExists) {
-		$response['status'] = 1;
-		$response['msg'] = 'На эту почту уже есть регистрация! Введите другую.';
-	}
-
-	echo json_encode($response, JSON_UNESCAPED_UNICODE);
+	echo $response;
 }
 
 
