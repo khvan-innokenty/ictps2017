@@ -8,8 +8,10 @@ $rf-color-correct: #1B5E20;
   padding-bottom: 1em;
   position: relative;
 
-  .f-modal-inner {
-    visibility: hidden;
+  .loading-icon {
+    display: none;
+    background: url("/img/loading-white-bg.gif") no-repeat center center;
+    height: 140px;
   }
 
   &.loading {
@@ -17,12 +19,8 @@ $rf-color-correct: #1B5E20;
       display: block;
     }
 
-    .f-modal-alert {
-      background: url("/img/loading-white-bg.gif") no-repeat center center;
-    }
-
-    .f-modal-inner {
-      visibility: hidden;
+    .loading-icon {
+      display: block;
     }
   }
 
@@ -39,12 +37,6 @@ $rf-color-correct: #1B5E20;
       &:enabled:hover {
         color: black;
       }
-    }
-  }
-
-  &.last-step {
-    .f-modal-inner {
-      visibility: visible;
     }
   }
 }

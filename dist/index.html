@@ -354,32 +354,44 @@
                 </div>
                 <div class='rf__step' data-title='Завершение регистрации'>
                     <div class="container">
-                        <div class="f-modal-alert">
-                            <div class="f-modal-inner">
-                                <div class="f-modal-icon f-modal-success">
-                                    <span class="f-modal-line f-modal-tip animateSuccessTip"></span>
-                                    <span class="f-modal-line f-modal-long animateSuccessLong"></span>
-                                    <div class="f-modal-placeholder"></div>
-                                    <div class="f-modal-fix"></div>
-                                </div>
-                                <div class="f-modal-message">
-                                    <p>Отлично! Вы зарегистрировались на мероприятие. Мы скоро свяжемся с Вами, чтобы ответить на все интересующие вопросы.</p>
-                                    <p>Если вопросов нет &mdash; переходите к оплате.</p>
+                        <div class="loading-icon"></div>
+                        <div class="f-modal-alert hidden" id="register-success">
+                            <div class="f-modal-icon f-modal-success">
+                                <span class="f-modal-line f-modal-tip animateSuccessTip"></span>
+                                <span class="f-modal-line f-modal-long animateSuccessLong"></span>
+                                <div class="f-modal-placeholder"></div>
+                                <div class="f-modal-fix"></div>
+                            </div>
+                            <div class="f-modal-message">
+                                <p>Отлично! Вы зарегистрировались на мероприятие. Мы скоро свяжемся с Вами, чтобы ответить на все интересующие вопросы.</p>
+                                <p>Если вопросов нет &mdash; переходите к оплате.</p>
 
-                                    <form action="https://rbkmoney.ru/acceptpurchase.aspx" name="pay" method="POST" id="rbk">
-                                        <input type="hidden" name="eshopId" value="2033199">
-                                        <input type="hidden" name="orderId" value="{{ date('mdhis') }}">
-                                        <input type="hidden" name="serviceName" value="Форма регистрации участника VII МЕЖДУНАРОДНЫЙ КУРС-ТРЕНИНГ ДЛЯ ПЛАСТИЧЕСКИХ И РЕКОНСТРУКТИВНЫХ ХИРУРГОВ">
-                                        <input type="hidden" name="successUrl" value="http://ictps.ru">
-                                        <input type="hidden" name="failUrl" value="http://ictps.ru">
-                                        <input type="hidden" name="recipientCurrency" value="RUR">
-                                        <input type="hidden" name="recipientAmount" value="">
-                                        <input type="hidden" name="user_email" value="">
-                                        <input type="hidden" name="userField_1" value="">
-                                        <button type="submit" class="button button--pay" tabindex="-1"><span>Оплатить</span></button>
-                                    </form>
-
-                                </div>
+                                <form action="https://rbkmoney.ru/acceptpurchase.aspx" name="pay" method="POST" id="rbk">
+                                    <input type="hidden" name="eshopId" value="2033199">
+                                    <input type="hidden" name="orderId" value="{{ date('mdhis') }}">
+                                    <input type="hidden" name="serviceName" value="Форма регистрации участника VII МЕЖДУНАРОДНЫЙ КУРС-ТРЕНИНГ ДЛЯ ПЛАСТИЧЕСКИХ И РЕКОНСТРУКТИВНЫХ ХИРУРГОВ">
+                                    <input type="hidden" name="successUrl" value="http://ictps.ru">
+                                    <input type="hidden" name="failUrl" value="http://ictps.ru">
+                                    <input type="hidden" name="recipientCurrency" value="RUR">
+                                    <input type="hidden" name="recipientAmount" value="">
+                                    <input type="hidden" name="user_email" value="">
+                                    <input type="hidden" name="userField_1" value="">
+                                    <button type="submit" class="button button--pay" tabindex="-1"><span>Оплатить</span></button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="f-modal-alert hidden" id="register-error">
+                            <div class="f-modal-icon f-modal-error">
+                                    <span class="f-modal-x-mark">
+                                        <span class="f-modal-line f-modal-left animateXLeft"></span>
+                                        <span class="f-modal-line f-modal-right animateXRight"></span>
+                                    </span>
+                                <div class="f-modal-placeholder"></div>
+                                <div class="f-modal-fix"></div>
+                            </div>
+                            <div class="f-modal-message">
+                                <p>Ой! Что-то пошло не так!</p>
+                                <p id="register-error-message"></p>
                             </div>
                         </div>
                     </div>

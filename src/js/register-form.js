@@ -16,7 +16,10 @@
         totalPriceSelector: '#rf-total-price',
         bulletClass: 'rf__bullet',
         bulletTitleClass: 'rf__bullet__title',
-        registerUrl: '/register'
+        registerUrl: '/register',
+        registerSuccessSelector: '#register-success',
+        registerErrorSelector: '#register-error',
+        registerErrorMessageSelector: '#register-error-message'
     };
 
     var $form = $(settings.formSelector),
@@ -32,6 +35,9 @@
         $currentTitle = $form.find( settings.currentStepTitleSelector ),
         $currentStep = $form.find( settings.currentStepSelector ),
         $totalSteps = $form.find( settings.totalStepsSelector ),
+        $registerSuccess = $form.find( settings.registerSuccessSelector ),
+        $registerError = $form.find( settings.registerErrorSelector ),
+        $registerErrorMessage = $form.find( settings.registerErrorMessageSelector ),
         inputs = [], // массив полей ввода для каждого шага, нумерация с 0
         bullets = [], // массив $-объектов - цифр
         bulletTitles = [], // массив $-объектов - попдисей к цифрам
@@ -277,6 +283,8 @@
 
         if (currentStep !== lastStep) {
             $form.removeClass('last-step');
+            $registerError.hide();
+            $registerSuccess.hide();
         }
 
         if ( inputs[currentStep] ) {
@@ -370,6 +378,7 @@
         $buttonNext.prop('disabled', true);
         $buttonPrev.prop('disabled', true);
         $overlay.hide();
+        slider.updateSliderSize(true);
 
         console.log( data );
 
@@ -377,15 +386,28 @@
         $("input[name='user_email']").val( data['email'] );
         $("input[name='userField_1']").val( data['email'] );
 
-        $.post(settings.registerUrl, data, function( msg ){
-            $form.removeClass('loading').addClass('last-step');
-            $buttonNext.prop('disabled', false);
-            $buttonPrev.prop('disabled', false);
-            $overlay.hide();
-            $(".f-modal-icon").addClass('animate');
-            setStep( lastStep );
-            console.log( msg );
-        });
+        $.post(settings.registerUrl, data)
+            .always(function (msg){
+                var response = $.parseJSON( msg );
+
+                $form.removeClass('loading').addClass('last-step');
+                $buttonNext.prop('disabled', false);
+                $buttonPrev.prop('disabled', false);
+                $overlay.hide();
+
+                if ( response && parseInt(response.status) ) {
+                    $registerSuccess.show();
+                    $registerSuccess.find('f-modal-icon').addClass('animate');
+                    setStep( lastStep );
+                } else {
+                    console.log( "Ошибка: " + msg );
+                    $registerError.show();
+                    $registerError.find('f-modal-icon').addClass('animate');
+                    $registerErrorMessage.html( response ? response.msg : 'Сервер регистрации не ответил как надо.');
+                }
+
+                slider.updateSliderSize(true);
+            });
     }
 
 
