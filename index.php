@@ -79,10 +79,21 @@ function register($f3) {
 
 	$post = filter_var_array($post, FILTER_SANITIZE_STRING);
 
+	$tickets = $f3->get('tickets');
+	$ticketId = intval($post['ticket']);
+	$ticketTitle = "";
+	for ($i = 0; $i<count($tickets); $i++) {
+		if ($ticketId === intval($tickets[$i]['id']) ) {
+			$ticketTitle = $tickets[$i]['title'];
+			if (is_array($ticketTitle)) $ticketTitle = implode(" ", $ticketTitle);
+			break;
+		}
+	}
+
 	$data[] = "---------------------------------------";
 	$data[] = date('d.m.Y H:i:s');
 	$data[] = "РЕГИСТРАЦИЯ";
-	$data[] = "Пакет участия: " . $post['ticket'];
+	$data[] = "Пакет участия: " . $ticketTitle . " (id=" . $ticketId . ")";
 	$data[] = "Фамилия: " . $post['f'];
 	$data[] = "Имя: " . $post['i'];
 	$data[] = "Отчество: " . $post['o'];

@@ -290,7 +290,7 @@
                 <div class='rf__step' data-title='Вариант участия'>
                     <div class="container text-center cf">
                         <repeat group="{{ @tickets }}" value="{{ @item }}" key="{{ @i }}">
-                            <input type='radio' name='ticket' class='rf__rich__checkbox' id='{{ "ticket-conf-" . @i }}' data-price="{{ @pricelist.current[@i] }}" value="{{ @item.title . ' ' . @item.comment | raw,strip }}" {{ @i === 0 ? "checked" : "" }}>
+                            <input type='radio' name='ticket' class='rf__rich__checkbox' id='{{ "ticket-conf-" . @i }}' data-price="{{ @pricelist.current[@i] }}" value="{{ @item.id }}" {{ @i === 0 ? "checked" : "" }}>
                             <label for='{{ "ticket-conf-" . @i }}' class="js-align-height">
                             <span class='title'>
                                 {{ @item.title | raw }}
