@@ -18,7 +18,8 @@ $f3->set('dates', getEventsDates());
 
 $f3->route('GET /',
 	function($f3) {
-        $lang = explode(',', $f3->get('LANGUAGE'))[0];
+        $lang = explode(',', $f3->get('LANGUAGE'));
+        $lang = $lang[0];
         if ($lang === 'en') $f3->reroute('/en');
         $f3->reroute('/ru');
 	}
@@ -93,14 +94,10 @@ function register($f3) {
 	$data[] = date('d.m.Y H:i:s');
 	$data[] = "РЕГИСТРАЦИЯ";
 	$data[] = "Пакет участия: " . $ticketTitle . " (id=" . $ticketId . ")";
-	$data[] = "Фамилия: " . $post['f'];
-	$data[] = "Имя: " . $post['i'];
-	$data[] = "Отчество: " . $post['o'];
+	$data[] = "ФИО: " . $post['fullname'];
 	$data[] = "Телефон: " . $post['tel'];
 	$data[] = "Почта: " . $post['email'];
-	$data[] = "Город: " . $post['city'];
-	$data[] = "Специальность: " . $post['profession'];
-	$data[] = "Место работы: " . $post['job'];
+	$data[] = "Город (по IP-адресу): " . $post['city'];
 	$data[] = "Уже посещал ICTPS ранее: " . ($post['regular'] ? 'ДА' : 'нет');
 	$data[] = "Ординатор/интерн/аспирант: " . ($post['student'] ? 'ДА' : 'нет');
 	$data[] = "Член РОПРЭХ: " . ($post['spras'] ? 'ДА' : 'нет');
@@ -111,10 +108,12 @@ function register($f3) {
 	$data[] = "---------------------------------------";
 	$data[] = "";
 
-	sendEmail('d.medentsov@bioconcept.ru', 'Регистрация на ICTPS (' . $post['f'] . ')', $data );
+	sendEmail('d.medentsov@bioconcept.ru', 'Регистрация на ICTPS (' . $post['fullname'] . ')', $data );
+	sendEmail('events@bioconcept.ru', 'Регистрация на ICTPS (' . $post['fullname'] . ')', $data );
 
 	file_put_contents( $f3->get('ROOT') .'/registration.txt', implode("\r\n", $data), FILE_APPEND);
 
+	/*
 	$myCurl = curl_init();
 	curl_setopt_array($myCurl, array(
 		CURLOPT_URL => 'http://www.ictps.ru/events/new_order.php',
@@ -124,6 +123,9 @@ function register($f3) {
 	));
 	$response = curl_exec($myCurl);
 	curl_close($myCurl);
+	*/
+
+	$response = '{"status":1, "msg":"Вы успешно зарегистрированы на мероприятие."}';
 
 	echo $response;
 }
@@ -278,14 +280,12 @@ function loadData() {
             'description' => $item[2]
         );
 
-        /*
         $urls = array_slice($item, 3);
         foreach( $urls as $url) {
             if ( strpos($url, 'twitter.com') !== false ) $speaker['twitter'] = $url;
             if ( strpos($url, 'facebook.com') !== false ) $speaker['facebook'] = $url;
             if ( strpos($url, 'instagram.com') !== false ) $speaker['instagram'] = $url;
         }
-        */
 
         array_push($speakers, $speaker);
     }
@@ -493,7 +493,7 @@ function getRussiaLocation( $ip ) {
     );
 
     $context = stream_context_create($options);
-    $result = file_get_contents("https://dadata.ru/api/v2/detectAddressByIp?ip=".$ip, false, $context);
+    $result = @file_get_contents("https://dadata.ru/api/v2/detectAddressByIp?ip=".$ip, false, $context);
     return $result === false ? null : json_decode($result, true);
 }
 

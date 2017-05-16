@@ -16,6 +16,46 @@
   }
 }
 
+.hero__promo {
+  position: relative;
+}
+
+.hero__promo__links {
+  position: absolute;
+  right: 0;
+  top: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: .9em;
+  font-weight: 300;
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    padding: $header-padding*4 $header-padding $header-padding;
+
+    span {
+      border-bottom: 1px solid rgba(255, 255, 255, .4);
+      transition: border $transition;
+    }
+
+    &:hover {
+      color: white;
+
+      span {
+        border-bottom-color: white;
+      }
+    }
+  }
+}
+
+
 .hero__absolute {
   position: absolute;
   left: 0;
@@ -127,6 +167,10 @@
 
   .hero__register {
     padding-bottom: 50px;
+  }
+
+  .hero__promo {
+    display: none;
   }
 }
 

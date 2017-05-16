@@ -36,6 +36,7 @@ $header-padding: 1em;
 }
 
 .header__right {
+  display: none;
   float: right;
 }
 
@@ -171,5 +172,13 @@ $header-padding: 1em;
 
   .hamburger {
     display: block;
+  }
+
+  .header__right {
+    display: block;
+  }
+
+  .change-site {
+    display: block !important;
   }
 }

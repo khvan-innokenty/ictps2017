@@ -28,6 +28,8 @@
                 <?php endif; ?>
                 <li><a href="#gala-dinner"><span><?= $DICT['dinner'] ?></span></a></li>
                 <li><a href="#venue"><span><?= $DICT['venue'] ?></span></a></li>
+                <?php if ($LANG === 'ru'): ?><li class="show-on-mobile"><a href="http://practiceconf.ru" class="change-site" target="_blank"><span>Для руководителей</span></a></li><?php endif; ?>
+                <li class="show-on-mobile"><a href="http://www.iectc.ru" class="change-site" target="_blank"><span>IECTC 2017</span></a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <div class="hamburger__line1"></div>
@@ -38,12 +40,17 @@
             </div>
         </div>
         <div class="header__right">
-            <a class="change-language" href="/<?= $other_lang ?>"><span><?= $other_lang ?></span></a><a class="change-site" href="http://www.iectc.ru"><span>IECTC 2017</span></a>
+            <a class="change-language" href="/<?= $other_lang ?>"><span><?= $other_lang ?></span></a>
         </div>
     </div>
 </div>
 
 <div class="hero">
+    <div class="container hero__promo">
+        <div class="hero__promo__links">
+            <?php if ($LANG === 'ru'): ?><a href="http://practiceconf.ru" class="change-site" target="_blank"><span>Для руководителей</span></a><?php endif; ?><a href="http://www.iectc.ru" class="change-site" target="_blank"><span>IECTC 2017</span></a><a class="change-language" href="/<?= $other_lang ?>"><span><?= $other_lang ?></span></a>
+        </div>
+    </div>
     <div class="hero__absolute hero__block1">
         <div class="hero__date-n-city">
             <div><?= periodFormat($course['start'], $course['end']) ?></div>
@@ -135,6 +142,11 @@
                 <?php echo $this->render('../data/' . $LANG . '/day' . ($key + 1) . '.html',NULL,get_defined_vars(),0); ?>
             </div>
         <?php endforeach; ?>
+        <ul class="day__selector">
+            <?php foreach (($dates?:[]) as $key=>$item): ?>
+                <li><a href="#day-<?= $key + 1 ?>" class="js-select-day <?= $key === 0 ? 'active' : '' ?>"><span class="day__title"><?= shortDateFormat( $item ) ?></span><span class="day__dof"><?= dof( $item ) ?></span></a></li>
+            <?php endforeach; ?>
+        </ul>
     </div>
 </div>
 
@@ -156,59 +168,9 @@
                     <p><b>Нефиксированный</b> биологический материал высочайшего качества.</p>
                     <p>2 участника на препарат.</p>
                     <p>Каждый участник <b>отработает навыки</b> под руководством тренера и проведёт диссекцию.</p>
+                    <a class="button button-small" href="#book">Забронировать место</a>
                 </div>
             </div>
-            <p class="text-center">Заявки на участие в диссекционном курсе принимаются на e-mail: <a href="mailto:events@bioconcept.ru">events@bioconcept.ru</a></p>
-        </div>
-    </div>
-
-    <div class="business block" id="business">
-        <div class="container">
-            <h2>Бизнес-практикум для руководителей</h2>
-            <div class="business__title">&laquo;Как увеличить оборот клиники на 100%&raquo;</div>
-            <div class="business__hero">
-                <img class="business__hero__bg" src="/img/growth.svg">
-                <img class="business__hero__logo" src="/img/ruble.svg">
-                <div class="business__hero__description">
-                    <div class="business__hero__dates">9&ndash;10 июня 2017</div>
-                    В рамках IECTS / ICTPS
-                </div>
-            </div>
-        </div>
-        <div class="business__pricelist__wrapper container">
-            <div class="business__pricelist">
-                <div class="business__pricelist__row">
-                    <?php foreach (($business['tickets']?:[]) as $item): ?>
-                        <div class="business__pricelist__cell top"><div class="title"><?= $item['title'] ?></div></div>
-                    <?php endforeach; ?>
-                </div>
-                <div class="business__pricelist__row">
-                    <?php foreach (($business['tickets']?:[]) as $item): ?>
-                        <div class="business__pricelist__cell middle">
-                            <?php foreach (($item['features']?:[]) as $feature): ?>
-                                <div class="feature"><?= $feature ?></div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-                <div class="business__pricelist__row">
-                    <?php foreach (($business['tickets']?:[]) as $item): ?>
-                        <div class="business__pricelist__cell bottom">
-                            <table>
-                                <?php foreach (($item['pricelist']?:[]) as $i=>$price): ?>
-                                    <tr class="<?= $business['pricelist']['classes'][$i] ?>">
-                                        <td><?= $this->raw($business['pricelist']['titles'][$i]) ?></td>
-                                        <td><?= price($price) ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </table>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <p class="text-center">Заявки на участие в бизнес–практикуме принимаются на e-mail: <a href="mailto:events@bioconcept.ru">events@bioconcept.ru</a></p>
         </div>
     </div>
 
@@ -232,8 +194,8 @@
                             <b>3 место</b> &mdash; хирургические инструменты на сумму 15 000 рублей.
                         </div>
                     </div>
-                    <a href="/data/ictps-2017-statues.pdf" class="button button--with-image" download><img src="/img/download.svg"> Положение о конкурсе</a>
-                    <a href="/data/ictps-2017-bid-form.pdf" class="button button--with-image" download><img src="/img/download.svg"> Заявка на участие</a>
+                    <a href="/data/ictps-2017-statues.pdf" class="button button-small button--with-image" download><img src="/img/download.svg"> Положение о конкурсе</a>
+                    <a href="/data/ictps-2017-bid-form.pdf" class="button button-small button--with-image" download><img src="/img/download.svg"> Заявка на участие</a>
                 </div>
             </div>
         </div>
@@ -290,7 +252,7 @@
                 <div class='rf__step' data-title='Вариант участия'>
                     <div class="container text-center cf">
                         <?php foreach (($tickets?:[]) as $i=>$item): ?>
-                            <input type='radio' name='ticket' class='rf__rich__checkbox' id='<?= "ticket-conf-" . $i ?>' data-price="<?= $pricelist['current'][$i] ?>" value="<?= strip_tags($this->raw($item['title'] . ' ' . $item['comment'])) ?>" <?= $i === 0 ? "checked" : "" ?>>
+                            <input type='radio' name='ticket' class='rf__rich__checkbox' id='<?= "ticket-conf-" . $i ?>' data-price="<?= $pricelist['current'][$i] ?>" data-discountable="<?= $item['discountable'] ?>" value="<?= $item['id'] ?>" <?= $i === 0 ? "checked" : "" ?>>
                             <label for='<?= "ticket-conf-" . $i ?>' class="js-align-height">
                             <span class='title'>
                                 <?= $this->raw($item['title']) ?>
@@ -314,24 +276,12 @@
                                     </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>
+                            <input type="hidden" name="city" id="city" value="">
                         </div>
                     </div>
                 </div>
 
-                <div class='rf__step' data-title='Работа'>
-                    <div class="container">
-                        <div class="rf__inputs cf">
-                            <?php foreach (($inputs?:[]) as $item): ?>
-                                <?php if (!$item['required']): ?>
-                                    <div class='rf__input-block <?= $item['half'] ? "half" : "" ?>'>
-                                        <label for='<?= $item['slug'] ?>'><?= $item['title'] ?> <span class="comment">по желанию</span></label>
-                                        <input type='text' name='<?= $item['slug'] ?>' id='<?= $item['slug'] ?>' value="<?= $GET[$item['slug']] ?>">
-                                    </div>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <div class='rf__step' data-title='Дополнительные опции'>
                     <div class="container cf">
@@ -354,32 +304,44 @@
                 </div>
                 <div class='rf__step' data-title='Завершение регистрации'>
                     <div class="container">
-                        <div class="f-modal-alert">
-                            <div class="f-modal-inner">
-                                <div class="f-modal-icon f-modal-success">
-                                    <span class="f-modal-line f-modal-tip animateSuccessTip"></span>
-                                    <span class="f-modal-line f-modal-long animateSuccessLong"></span>
-                                    <div class="f-modal-placeholder"></div>
-                                    <div class="f-modal-fix"></div>
-                                </div>
-                                <div class="f-modal-message">
-                                    <p>Отлично! Вы зарегистрировались на мероприятие. Мы скоро свяжемся с Вами, чтобы ответить на все интересующие вопросы.</p>
-                                    <p>Если вопросов нет &mdash; переходите к оплате.</p>
+                        <div class="loading-icon"></div>
+                        <div class="f-modal-alert hidden" id="register-success">
+                            <div class="f-modal-icon f-modal-success">
+                                <span class="f-modal-line f-modal-tip animateSuccessTip"></span>
+                                <span class="f-modal-line f-modal-long animateSuccessLong"></span>
+                                <div class="f-modal-placeholder"></div>
+                                <div class="f-modal-fix"></div>
+                            </div>
+                            <div class="f-modal-message">
+                                <p>Отлично! Вы зарегистрировались на мероприятие. Мы скоро свяжемся с Вами, чтобы ответить на все интересующие вопросы.</p>
+                                <p>Если вопросов нет &mdash; переходите к оплате.</p>
 
-                                    <form action="https://rbkmoney.ru/acceptpurchase.aspx" name="pay" method="POST" id="rbk">
-                                        <input type="hidden" name="eshopId" value="2033199">
-                                        <input type="hidden" name="orderId" value="<?= date('mdhis') ?>">
-                                        <input type="hidden" name="serviceName" value="Форма регистрации участника VII МЕЖДУНАРОДНЫЙ КУРС-ТРЕНИНГ ДЛЯ ПЛАСТИЧЕСКИХ И РЕКОНСТРУКТИВНЫХ ХИРУРГОВ">
-                                        <input type="hidden" name="successUrl" value="http://ictps.ru">
-                                        <input type="hidden" name="failUrl" value="http://ictps.ru">
-                                        <input type="hidden" name="recipientCurrency" value="RUR">
-                                        <input type="hidden" name="recipientAmount" value="">
-                                        <input type="hidden" name="user_email" value="">
-                                        <input type="hidden" name="userField_1" value="">
-                                        <button type="submit" class="button button--pay" tabindex="-1"><span>Оплатить</span></button>
-                                    </form>
-
-                                </div>
+                                <form action="https://rbkmoney.ru/acceptpurchase.aspx" name="pay" method="POST" id="rbk">
+                                    <input type="hidden" name="eshopId" value="2033199">
+                                    <input type="hidden" name="orderId" value="<?= date('mdhis') ?>">
+                                    <input type="hidden" name="serviceName" value="Форма регистрации участника VII МЕЖДУНАРОДНЫЙ КУРС-ТРЕНИНГ ДЛЯ ПЛАСТИЧЕСКИХ И РЕКОНСТРУКТИВНЫХ ХИРУРГОВ">
+                                    <input type="hidden" name="successUrl" value="http://ictps.ru">
+                                    <input type="hidden" name="failUrl" value="http://ictps.ru">
+                                    <input type="hidden" name="recipientCurrency" value="RUR">
+                                    <input type="hidden" name="recipientAmount" value="">
+                                    <input type="hidden" name="user_email" value="">
+                                    <input type="hidden" name="userField_1" value="">
+                                    <button type="submit" class="button button--pay" tabindex="-1"><span>Оплатить</span></button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="f-modal-alert hidden" id="register-error">
+                            <div class="f-modal-icon f-modal-error">
+                                    <span class="f-modal-x-mark">
+                                        <span class="f-modal-line f-modal-left animateXLeft"></span>
+                                        <span class="f-modal-line f-modal-right animateXRight"></span>
+                                    </span>
+                                <div class="f-modal-placeholder"></div>
+                                <div class="f-modal-fix"></div>
+                            </div>
+                            <div class="f-modal-message">
+                                <p>Ой! Что-то пошло не так!</p>
+                                <p id="register-error-message"></p>
                             </div>
                         </div>
                     </div>
@@ -440,15 +402,15 @@
                     <?= $DICT['hotel'] ?>
                 </p>
                 <p>
-                    <a href="tel:+74956057424"><img src="/img/phone.svg"><span>+7 (495) 605-74-24</span></a><br>
-                    <a href="tel:+79857676693"><img src="/img/phone.svg"><span>+7 (985) 767-66-93</span></a>
+                    <a class="social" href="tel:+74956057424"><img src="/img/phone.svg"><span>+7 (495) 605-74-24</span></a><br>
+                    <a class="social" href="tel:+79857676693"><img src="/img/phone.svg"><span>+7 (985) 767-66-93</span></a>
                 </p>
                 <p>
-                    <a href="mailto:events@bioconcept.ru"><img src="/img/mail.svg"><span>events@bioconcept.ru</span></a><br>
-                    <a href="https://www.facebook.com/spbictps/"><img src="/img/facebook.svg"><span>facebook.com/spbictps</span></a><br>
-                    <a href="https://vk.com/ictps"><img src="/img/vk.svg"><span>vk.com/ictps</span></a><br>
-                    <a href="https://www.instagram.com/explore/tags/ictps/"><img src="/img/instagram.svg"><span>#ictps</span></a><br>
-                    <a href="https://www.youtube.com/channel/UC3XApVGvPT-bkxrTUnDxenA/feed"><img src="/img/youtube.svg"><span><?= $DICT['video'] ?></span></a><br>
+                    <a class="social" href="mailto:events@bioconcept.ru"><img src="/img/mail.svg"><span>events@bioconcept.ru</span></a><br>
+                    <a class="social" href="https://www.facebook.com/spbictps/"><img src="/img/facebook.svg"><span>facebook.com/spbictps</span></a><br>
+                    <a class="social" href="https://vk.com/ictps"><img src="/img/vk.svg"><span>vk.com/ictps</span></a><br>
+                    <a class="social" href="https://www.instagram.com/explore/tags/ictps/"><img src="/img/instagram.svg"><span>#ictps</span></a><br>
+                    <a class="social" href="https://www.youtube.com/channel/UC3XApVGvPT-bkxrTUnDxenA/feed"><img src="/img/youtube.svg"><span><?= $DICT['video'] ?></span></a><br>
                 </p>
             </div>
         </div>
@@ -457,51 +419,32 @@
             <div class="cf">
                 <div class="brand">
                     <h3><?= $DICT['organizer'] ?></h3>
-                    <img src="/img/bioconcept.png">
+                    <a href="http://bioconcept.ru"><img src="/img/bioconcept.png" style="width: 200px"></a>
                 </div>
                 <div class="brand">
                     <h3><?= $DICT['generalSponsor'] ?></h3>
-                    <img src="/img/clovermed.png">
+                    <a href="http://www.clovermed.ru"><img src="/img/clovermed.png"></a>
                 </div>
                 <div class="brand">
                     <h3><?= $DICT['support'] ?></h3>
-                    <img src="/img/spbgmu.png">
-                    <img src="/img/mant.png">
-                    <img src="/img/spras.png">
+                    <a href="http://1spbgmu.ru/ru/"><img src="/img/spbgmu.png"></a>
+                    <a href="http://www.plastickafedra.com/"><img src="/img/mant.png"></a>
+                    <a href="http://spras.ru/"><img src="/img/spras.png"></a>
                 </div>
                 <div class="brand">
                     <h3><?= $DICT['partner'] ?></h3>
-                    <img src="/img/kuprin.png">
+                    <a href="https://pavel-kuprin.ru/"><img src="/img/kuprin.png"></a>
                 </div>
             </div>
             <h3><?= $DICT['sponsors'] ?></h3>
-            <img src="/img/motiva.png">
-            <img src="/img/jj.png">
+            <a href="http://motivawoman.com/"><img src="/img/motiva.png"></a>
+            <a href="https://www.jnj.ru/"><img src="http://mosbreast.ru/specialist/template/img/j_j.png"></a>
+            <a href="http://www.bmatrix.ru/"><img src="http://iectc.ru/img/exponents/2017/polytech.png"></a>
         </div>
     </div>
 </div>
 
-<div class="block">
-    <div class="container">
-        <h2><?= $DICT['expo'] ?> ICTPS</h2>
-        <ul class="expo">
-            <?php foreach (($expo['ictps']?:[]) as $item): ?>
-                <li><img src="<?= $item ?>"></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-</div>
-
-<div class="block">
-    <div class="container">
-        <h2><?= $DICT['expo'] ?> IECTC</h2>
-        <ul class="expo">
-            <?php foreach (($expo['iectc']?:[]) as $item): ?>
-                <li><img src="<?= $item ?>"></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-</div>
+<?php echo $this->render('expo.html',NULL,get_defined_vars(),0); ?>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="/dist/app.min.js?v=<?= $APP_VERSION ?>"></script>

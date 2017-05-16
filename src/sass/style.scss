@@ -57,6 +57,10 @@ body {
   padding: 3.5em 0;
 }
 
+.show-on-mobile {
+  display: none;
+}
+
 
 @media (max-width: $bp-tablet) {
   .container {
@@ -65,6 +69,11 @@ body {
   }
 }
 
+@media (max-width: $bp-small) {
+  .show-on-mobile {
+    display: block;
+  }
+}
 
 
 /* ======================================================

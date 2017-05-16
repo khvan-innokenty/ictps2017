@@ -75,8 +75,23 @@
                 return;
             }
 
+            if (newSlide === 1 && currentStep === 0) {
+                typeof yaCounter28534656 !== 'undefined' && yaCounter28534656.reachGoal('REGISTER_1');
+                console.log('REGISTER_1');
+            }
+            if (newSlide === 2 && currentStep === 1) {
+                typeof yaCounter28534656 !== 'undefined' && yaCounter28534656.reachGoal('REGISTER_2');
+                console.log('REGISTER_2');
+            }
+            if (newSlide === 3 && currentStep === 2) {
+                typeof yaCounter28534656 !== 'undefined' && yaCounter28534656.reachGoal('REGISTER_3');
+                console.log('REGISTER_3');
+            }
+
             if ( newSlide === lastStep && currentStep !== lastStep ) {
                 register();
+                typeof yaCounter28534656 !== 'undefined' && yaCounter28534656.reachGoal('REGISTER_DONE');
+                console.log('REGISTER_DONE');
             }
 
             setStep( newSlide );
@@ -169,7 +184,9 @@
      * Пересчитать цену
      */
     function updatePrice() {
-        var maxDiscount = 0;
+        var maxDiscount = 0,
+            $ticket = $("input[name='ticket']:checked"),
+            discountable = $ticket.data('discountable');
 
         totalPrice = 0;
 
@@ -190,7 +207,7 @@
             });
         }
 
-        totalPrice = totalPrice * (1 - maxDiscount/100);
+        if (discountable) totalPrice = totalPrice * (1 - maxDiscount/100);
         $totalPrice.html( totalPrice.toRubles() );
     }
 
@@ -364,6 +381,8 @@
                 }
             });
         }
+
+        data['city'] = $("#city").val();
 
         return data;
     }
