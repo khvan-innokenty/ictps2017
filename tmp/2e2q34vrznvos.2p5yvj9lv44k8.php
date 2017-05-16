@@ -28,7 +28,7 @@
                 <?php endif; ?>
                 <li><a href="#gala-dinner"><span><?= $DICT['dinner'] ?></span></a></li>
                 <li><a href="#venue"><span><?= $DICT['venue'] ?></span></a></li>
-                <?php if ($LANG === 'ru'): ?><li class="show-on-mobile"><a href="http://practiceconf.ru" class="change-site" target="_blank"><span>Для руководителей</span></a></li><?php endif; ?>
+                <?php if ($LANG === 'ru'): ?><li class="show-on-mobile"><a href="http://practiceconf.ru" class="change-site-2" target="_blank"><span>Курс для руководителей</span></a></li><?php endif; ?>
                 <li class="show-on-mobile"><a href="http://www.iectc.ru" class="change-site" target="_blank"><span>IECTC 2017</span></a></li>
             </ul>
             <div class="hamburger" id="hamburger">
@@ -48,7 +48,7 @@
 <div class="hero">
     <div class="container hero__promo">
         <div class="hero__promo__links">
-            <?php if ($LANG === 'ru'): ?><a href="http://practiceconf.ru" class="change-site" target="_blank"><span>Для руководителей</span></a><?php endif; ?><a href="http://www.iectc.ru" class="change-site" target="_blank"><span>IECTC 2017</span></a><a class="change-language" href="/<?= $other_lang ?>"><span><?= $other_lang ?></span></a>
+            <?php if ($LANG === 'ru'): ?><a href="http://practiceconf.ru" class="change-site-2" target="_blank"><span>Курс для руководителей</span></a><?php endif; ?><a href="http://www.iectc.ru" class="change-site" target="_blank"><span>IECTC 2017</span></a><a class="change-language" href="/<?= $other_lang ?>"><span><?= $other_lang ?></span></a>
         </div>
     </div>
     <div class="hero__absolute hero__block1">

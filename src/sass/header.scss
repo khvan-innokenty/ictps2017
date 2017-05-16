@@ -49,6 +49,10 @@ $header-padding: 1em;
   background: #B70C05;
 }
 
+.change-site-2 {
+  background: $primary;
+}
+
 .header__navigation {
   list-style: none;
   margin: 0;
@@ -178,7 +182,8 @@ $header-padding: 1em;
     display: block;
   }
 
-  .change-site {
+  .change-site,
+  .change-site-2 {
     display: block !important;
   }
 }
